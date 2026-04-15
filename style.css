@@ -18,88 +18,150 @@ body {
 }
 
 /* =================================================================== */
-/* Estilos para la PÁGINA DE INICIO (index.html) - CORREGIDO
+/* Estilos para la PÁGINA DE INICIO (index.html)
 /* =================================================================== */
 .main-card {
-    width: 100%; 
-    max-width: 750px; 
-    padding: 40px; 
+    width: 100%;
+    max-width: 750px;
+    padding: 40px;
     text-align: center;
-    background-color: #ffffff; 
-    border-radius: 12px; 
+    background-color: #ffffff;
+    border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-.main-card .logo { 
-    max-width: 315px; 
-    margin-bottom: 25px; 
+.main-card .logo {
+    max-width: 315px;
+    margin-bottom: 25px;
 }
 
 .main-card h1 {
-    color: #333; 
-    font-size: 1.5rem; 
-    font-weight: 700; 
-    margin-bottom: 40px;
-    text-transform: uppercase; 
-    letter-spacing: 1px; 
-    font-family: 'Montserrat', sans-serif;
-}
-
-.button-container { 
-    display: flex; 
-    justify-content: center; 
-    gap: 25px; 
-    flex-wrap: wrap; 
-}
-
-.choice-button {
-    flex-basis: 240px; 
-    padding: 20px; 
-    border: 2px solid #e5e7eb; 
-    border-radius: 8px;
-    text-decoration: none; 
-    transition: all 0.2s ease-in-out;
-}
-
-.choice-button:hover { 
-    transform: translateY(-4px); 
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08); 
-    border-color: #ccc; 
-}
-
-/* CORRECCIÓN: Los colores de los textos en hover */
-.choice-button:hover .text-desktop { 
-    color: #0078D4; /* Mantiene el azul de Outlook escritorio */
-}
-
-.choice-button:hover .text-web { 
-    color: #00A4EF; /* Mantiene el azul de Outlook web */
-}
-
-.choice-button:hover .text-mobile { 
-    color: #00A4EF; /* CORREGIDO: Ahora es azul (#00A4EF) en lugar de verde */
-}
-
-.button-text {
-    font-size: 0.9rem; 
-    font-weight: 700; 
-    letter-spacing: 0.5px; 
+    color: #163A73;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 32px;
     text-transform: uppercase;
-    transition: color 0.2s ease-in-out; 
+    letter-spacing: 1px;
     font-family: 'Montserrat', sans-serif;
 }
 
-/* Colores base - ya están correctos */
-.text-desktop { 
-    color: #0078D4; /* Azul oscuro de Outlook escritorio */
+/* --- Layout del contenedor de botones --- */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
 }
 
-.text-web {     
-    color: #00A4EF; /* Azul claro de Outlook web */
+/* --- Etiqueta de sección (ej: "Firmas de correo") --- */
+.section-label {
+    width: 100%;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #8a9bbf;
+    text-transform: uppercase;
+    margin: 14px 0 4px 2px;
+    font-family: 'Montserrat', sans-serif;
 }
 
-.text-mobile {  
-    color: #00A4EF; /* Azul claro de Outlook móvil - CORREGIDO (antes era verde) */
+/* --- Línea divisora entre secciones --- */
+.divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(22, 58, 115, 0.1);
+    margin: 0 0 4px 0;
+}
+
+/* --- Botón base compartido --- */
+.choice-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 16px 20px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 8px;
+    text-decoration: none;
+    background: #ffffff;
+    transition: all 0.2s ease-in-out;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.choice-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    border-color: #ccc;
+}
+
+/* --- Texto base de botón --- */
+.button-text {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: color 0.2s ease-in-out;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Colores para los botones de firma */
+.text-desktop { color: #0078D4; }
+.text-mobile  { color: #00A4EF; }
+
+.choice-button:hover .text-desktop { color: #0078D4; }
+.choice-button:hover .text-mobile  { color: #00A4EF; }
+
+/* --- Botones de plantillas de correo (email-btn) --- */
+.choice-button.email-btn {
+    justify-content: flex-start;
+    padding-left: 48px;
+    border-color: #d0daf0;
+}
+
+/* Ícono de sobre */
+.choice-button.email-btn::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 14px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 14' fill='none'%3E%3Crect x='0.5' y='0.5' width='17' height='13' rx='2' stroke='%230E58A9'/%3E%3Cpath d='M1 1l8 7 8-7' stroke='%230E58A9' stroke-width='1.2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.choice-button.email-btn .button-text {
+    color: #163A73;
+    font-size: 0.8rem;
+}
+
+/* Número de correo (ej: "01") */
+.choice-button.email-btn .email-num {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    font-weight: 700;
+    color: #0E58A9;
+    background: #e6f1fb;
+    border-radius: 4px;
+    padding: 2px 7px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.choice-button.email-btn:hover {
+    background: #eef3fb;
+    border-color: #0E58A9;
+    box-shadow: 0 4px 16px rgba(14, 88, 169, 0.12);
+}
+
+.choice-button.email-btn:hover .button-text {
+    color: #0E58A9;
 }
 
 /* =================================================================== */
@@ -153,20 +215,20 @@ body {
 
 .form-group { display: flex; flex-direction: column; }
 .form-group label { font-weight: 600; color: #334155; margin-bottom: 8px; }
-.form-group input[type="text"], 
+.form-group input[type="text"],
 .form-group select {
-    width: 100%; 
-    height: 40px; /* Cambiado de 48px a 40px */
-    border: 1px solid #cbd5e1; 
+    width: 100%;
+    height: 40px;
+    border: 1px solid #cbd5e1;
     border-radius: 6px;
-    padding: 0 24px; /* padding vertical 0, horizontal 24px */
+    padding: 0 24px;
     box-sizing: border-box;
-    font-size: 0.95rem; 
+    font-size: 0.95rem;
     font-family: 'Inter', sans-serif;
     background-color: #fff;
     transition: border-color 0.2s, box-shadow 0.2s;
-    -webkit-appearance: none; 
-    -moz-appearance: none; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
 }
 
@@ -175,7 +237,7 @@ body {
     background-repeat: no-repeat;
     background-position: right 12px top 50%;
     background-size: .65em auto;
-    padding-right: 36px; /* Este padding se suma al padding horizontal general */
+    padding-right: 36px;
 }
 .form-group select:invalid { color: #64748b; }
 .form-group input[type="text"]:focus, .form-group select:focus {
@@ -238,6 +300,9 @@ body {
     background-color: #4da42f;
 }
 
+/* =================================================================== */
+/* Responsive
+/* =================================================================== */
 @media (max-width: 900px) {
     .form-top-row, .form-middle-row {
         grid-template-columns: 1fr;
