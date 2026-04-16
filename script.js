@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         dependencia: document.getElementById('dependencia-empleado'),
     };
 
-    // --- Funciones ---
+    // --- Funciones existentes ---
     function toTitleCase(str) {
         if (!str) return '';
         return str.toLowerCase().split(' ').map(function(word) {
@@ -93,7 +93,57 @@ document.addEventListener('DOMContentLoaded', function() {
         return success;
     }
     
-    // --- Event Listeners ---
+    // --- FUNCIÓN SIMPLIFICADA PARA COPIAR EL CORREO ---
+    function showCopyMessage() {
+        const messageDiv = document.getElementById('copy-message');
+        if (messageDiv) {
+            messageDiv.classList.add('show');
+            setTimeout(() => {
+                messageDiv.classList.remove('show');
+            }, 2000);
+        }
+    }
+    
+    const copyEmailBtn = document.getElementById('copy-email-btn');
+    if (copyEmailBtn) {
+        copyEmailBtn.addEventListener('click', function() {
+            const emailContent = document.getElementById('email-content');
+            
+            if (!emailContent) {
+                alert('No se encontró el contenido del correo');
+                return;
+            }
+            
+            // Obtener el HTML del contenido
+            const htmlContent = emailContent.outerHTML;
+            
+            // Copiar al portapapeles
+            if (navigator.clipboard && navigator.clipboard.write) {
+                const blob = new Blob([htmlContent], { type: 'text/html' });
+                const clipboardItem = new ClipboardItem({ 'text/html': blob });
+                
+                navigator.clipboard.write([clipboardItem]).then(() => {
+                    // Cambiar texto del botón temporalmente
+                    const originalText = copyEmailBtn.textContent;
+                    copyEmailBtn.textContent = '¡Copiado!';
+                    copyEmailBtn.classList.add('copied');
+                    setTimeout(() => {
+                        copyEmailBtn.textContent = originalText;
+                        copyEmailBtn.classList.remove('copied');
+                    }, 2000);
+                    
+                    showCopyMessage();
+                }).catch(err => {
+                    console.error('Error al copiar:', err);
+                    alert('No se pudo copiar. Intenta seleccionar manualmente el contenido.');
+                });
+            } else {
+                alert('Tu navegador no soporta copiado automático. Selecciona el contenido manualmente.');
+            }
+        });
+    }
+    
+    // --- Event Listeners existentes ---
     if (generarBtn) {
 
         if (formInputs.nombre) {
@@ -128,7 +178,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             updateSignature();
 
-            // Mostrar resultado y botón de copiar
             if (resultadoWrapper) resultadoWrapper.style.display = 'block';
             if (copyBtn) copyBtn.disabled = false;
             if (mobileActionBtn) mobileActionBtn.disabled = false;
@@ -139,7 +188,6 @@ document.addEventListener('DOMContentLoaded', function() {
             generadoSpan.style.marginLeft = '10px';
         });
 
-        // Al editar cualquier campo, ocultar resultado hasta nuevo clic en Generar
         Object.values(formInputs).forEach(input => {
             if (input) {
                 input.addEventListener('input', () => {
@@ -152,7 +200,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Lógica para el botón de Copiar (Escritorio/Web)
     if (copyBtn && firmaContainer) {
         copyBtn.addEventListener('click', function() {
             if (copyBtn.disabled) return;
@@ -164,7 +211,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Lógica híbrida para el botón de Móvil
     if (mobileActionBtn && firmaContainer) {
         mobileActionBtn.addEventListener('click', function() {
             if (mobileActionBtn.disabled) return;
@@ -185,4 +231,5 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 5000);
         });
     }
+    
 });
