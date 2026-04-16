@@ -5,38 +5,84 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Generador de correo 1</title>
+    <style>
+        /* Estilos solo para la interfaz, NO para el correo copiado */
+        .copy-message {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #4da42f;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .copy-message.show {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
     <div class="noselect">
         <a href="index.html" class="back-button">&larr; Volver a la selección</a>
-        <p>
-            <div class="copy-button-wrapper">
-    <button id="copy-email-btn" class="action-button">Copiar Correo</button>
-</div>
-            <div class="email-table" id="email-content">
-                <p style="margin:32; padding:48; line-height:1px; text-align: center;"><img src="https://raw.githubusercontent.com/centricasolucionesdiseno-ux/Abrebocas-Mail/main/img/logo.png" alt="logo"></p>
-                <p style="margin:0; padding:0; line-height:1px;"><img src="https://raw.githubusercontent.com/centricasolucionesdiseno-ux/Abrebocas-Mail/main/img/Mail/Dia1.png" alt="imgRef"></p>
-                <div class="e-body">
-                  <h1>Arquitectura multi tenant lista para su proximo desarrollo.</h1>
-                  <p>Moverse de la idea a una solución funcional es más rápido cuando no tiene que construir la base desde cero.</p>
-                  <h2>Del caos legacy al orden industrial.</h2>
-                    <p>Los sistemas legacy que no soportan multi-tenant de forma nativa obligan a duplicar infraestructura y procesos. Presentamos una base estandarizada, medible y optimizable para modernizar su operación.</p>
-                  <a href="https://centricasolucionesdiseno-ux.github.io/landing-page/" class="e-cta" style="text-align: center;">Ver arquitectura de referencia</a>
-                  <div class="e-card">
-                    <div class="e-card-img"><span><img src="https://raw.githubusercontent.com/centricasolucionesdiseno-ux/Abrebocas-Mail/main/img/Mail/Frame1.png" alt="form"></span></div>
-                    <div class="e-card-body">
-                      <p class="e-card-title">Quieres conocer mas de Centrica</p>
-                      <p class="e-card-text">Mira que mas podemos ofrecer para ayudar en tu gestión empresarial.</p>
-                      <a href="https://centricasolucionesdiseno-ux.github.io/landing-page/" class="e-card-link">Descubre más →</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="e-footer">Centrica Soluciones · Todos los derechos reservados · <a href="#" style="color:#0E58A9;">Darse de baja</a></div>
-            </p>
-                </div>
-
+        
+        <!-- Botón para copiar correo -->
+        <div class="copy-button-wrapper">
+            <button id="copy-email-btn" class="action-button">Copiar Correo</button>
         </div>
+        
+        <!-- TABLA DEL CORREO CON ESTILOS INLINE -->
+        <div id="email-content" style="width: 650px; max-width: 100%; border: 1px solid #e2e2e2; border-radius: 24px; overflow: hidden; background-color: #ffffff; margin: 0 auto; font-family: Arial, Helvetica, sans-serif; color: #222222;">
+            
+            <p style="margin:32px; padding:48px; line-height:1px; text-align: center;">
+                <img src="https://raw.githubusercontent.com/centricasolucionesdiseno-ux/Abrebocas-Mail/main/img/logo.png" alt="logo">
+            </p>
+            
+            <p style="margin:0; padding:0; line-height:1px;">
+                <img src="https://raw.githubusercontent.com/centricasolucionesdiseno-ux/Abrebocas-Mail/main/img/Mail/Dia1.png" alt="imgRef">
+            </p>
+            
+            <div style="padding: 28px 32px 20px 32px;">
+                <h1 style="font-size: 22px; font-weight: 700; color: #163A73; margin: 0 0 12px 0; line-height: 1.3;">Arquitectura multi tenant lista para su proximo desarrollo.</h1>
+                
+                <p style="font-size: 14px; color: #444444; line-height: 1.7; margin: 0 0 14px 0;">Moverse de la idea a una solución funcional es más rápido cuando no tiene que construir la base desde cero.</p>
+                
+                <h2 style="font-size: 16px; font-weight: 700; color: #163A73; margin: 20px 0 8px 0;">Del caos legacy al orden industrial.</h2>
+                
+                <p style="font-size: 14px; color: #444444; line-height: 1.7; margin: 0 0 14px 0;">Los sistemas legacy que no soportan multi-tenant de forma nativa obligan a duplicar infraestructura y procesos. Presentamos una base estandarizada, medible y optimizable para modernizar su operación.</p>
+                
+                <a href="https://centricasolucionesdiseno-ux.github.io/landing-page/" style="display: inline-block; background: #0E58A9; color: #ffffff; font-size: 14px; font-weight: 700; padding: 12px 28px; border-radius: 6px; text-decoration: none; margin: 8px 0 24px 0; text-align: center;">Ver arquitectura de referencia</a>
+                
+                <div style="border: 1px solid #e0e0e0; border-radius: 10px; display: flex; overflow: hidden; margin-top: 8px;">
+                    <div style="width: 110px; min-width: 110px; background: #e8f0fb; display: flex; align-items: center; justify-content: center;">
+                        <img src="https://raw.githubusercontent.com/centricasolucionesdiseno-ux/Abrebocas-Mail/main/img/Mail/Frame1.png" alt="form" style="width: 110px; height: 100%; object-fit: cover; display: block;">
+                    </div>
+                    <div style="padding: 14px 16px; flex: 1;">
+                        <p style="font-size: 14px; font-weight: 700; color: #163A73; margin: 0 0 5px 0;">Quieres conocer mas de Centrica</p>
+                        <p style="font-size: 12px; color: #666666; line-height: 1.6; margin: 0 0 8px 0;">Mira que mas podemos ofrecer para ayudar en tu gestión empresarial.</p>
+                        <a href="https://centricasolucionesdiseno-ux.github.io/landing-page/" style="font-size: 12px; color: #0E58A9; font-weight: 700; text-decoration: none;">Descubre más →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="border-top: 1px solid #eeeeee; padding: 14px 32px; font-size: 11px; color: #999999; text-align: center;">
+                Centrica Soluciones · Todos los derechos reservados · <a href="#" style="color:#0E58A9;">Darse de baja</a>
+            </div>
+        </div>
+        
     </div>
+</div>
+
+<div id="copy-message" class="copy-message">✅ Correo copiado al portapapeles</div>
+
+<script src="script.js"></script>
 </body>
 </html>
