@@ -5,35 +5,145 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Generador de correo 1</title>
+    <!-- Solo agregamos un pequeño estilo extra para el mensaje flotante -->
+    <style>
+        /* Mensaje de copiado (no interfiere con tu CSS) */
+        .copy-message {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #4da42f;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .copy-message.show {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
     <div class="noselect">
         <a href="index.html" class="back-button">&larr; Volver a la selección</a>
-        <p>
-            <div class="email-table">
-                <p style="margin:32; padding:48; line-height:1px; text-align: center;"><img src="https://raw.githubusercontent.com/centricasolucionesdiseno-ux/Abrebocas-Mail/main/img/logo.png" alt="logo"></p>
-                <p style="margin:0; padding:0; line-height:1px;"><img src="https://raw.githubusercontent.com/centricasolucionesdiseno-ux/Abrebocas-Mail/main/img/Mail/Dia1.png" alt="imgRef"></p>
-                <div class="e-body">
-                  <h1>Arquitectura multi tenant lista para su proximo desarrollo.</h1>
-                  <p>Moverse de la idea a una solución funcional es más rápido cuando no tiene que construir la base desde cero.</p>
-                  <h2>Del caos legacy al orden industrial.</h2>
-                    <p>Los sistemas legacy que no soportan multi-tenant de forma nativa obligan a duplicar infraestructura y procesos. Presentamos una base estandarizada, medible y optimizable para modernizar su operación.</p>
-                  <a href="https://centricasolucionesdiseno-ux.github.io/landing-page/" class="e-cta" style="text-align: center;">Ver arquitectura de referencia</a>
-                  <div class="e-card">
+
+        <!-- BOTÓN COPIADOR (usando tu clase action-button) -->
+        <div class="copy-button-wrapper">
+            <button id="copy-btn" class="action-button">Copiar Correo</button>
+        </div>
+
+        <!-- TABLA PRINCIPAL DEL CORREO (mismo contenido que tenías) -->
+        <div class="email-table" id="email-content">
+            <p style="margin:32; padding:48; line-height:1px; text-align: center;"><img src="https://raw.githubusercontent.com/centricasolucionesdiseno-ux/Abrebocas-Mail/main/img/logo.png" alt="logo"></p>
+            <p style="margin:0; padding:0; line-height:1px;"><img src="https://raw.githubusercontent.com/centricasolucionesdiseno-ux/Abrebocas-Mail/main/img/Mail/Dia1.png" alt="imgRef"></p>
+            <div class="e-body">
+                <h1>Arquitectura multi tenant lista para su proximo desarrollo.</h1>
+                <p>Moverse de la idea a una solución funcional es más rápido cuando no tiene que construir la base desde cero.</p>
+                <h2>Del caos legacy al orden industrial.</h2>
+                <p>Los sistemas legacy que no soportan multi-tenant de forma nativa obligan a duplicar infraestructura y procesos. Presentamos una base estandarizada, medible y optimizable para modernizar su operación.</p>
+                <a href="https://centricasolucionesdiseno-ux.github.io/landing-page/" class="e-cta" style="text-align: center;">Ver arquitectura de referencia</a>
+                <div class="e-card">
                     <div class="e-card-img"><span><img src="https://raw.githubusercontent.com/centricasolucionesdiseno-ux/Abrebocas-Mail/main/img/Mail/Frame1.png" alt="form"></span></div>
                     <div class="e-card-body">
-                      <p class="e-card-title">Quieres conocer mas de Centrica</p>
-                      <p class="e-card-text">Mira que mas podemos ofrecer para ayudar en tu gestión empresarial.</p>
-                      <a href="https://centricasolucionesdiseno-ux.github.io/landing-page/" class="e-card-link">Descubre más →</a>
+                        <p class="e-card-title">Quieres conocer mas de Centrica</p>
+                        <p class="e-card-text">Mira que mas podemos ofrecer para ayudar en tu gestión empresarial.</p>
+                        <a href="https://centricasolucionesdiseno-ux.github.io/landing-page/" class="e-card-link">Descubre más →</a>
                     </div>
-                  </div>
                 </div>
-                <div class="e-footer">Centrica Soluciones · Todos los derechos reservados · <a href="#" style="color:#0E58A9;">Darse de baja</a></div>
-            </p>
-                </div>
-
+            </div>
+            <div class="e-footer">Centrica Soluciones · Todos los derechos reservados · <a href="#" style="color:#0E58A9;">Darse de baja</a></div>
         </div>
+        <!-- FIN TABLA CORREO -->
     </div>
+</div>
+
+<!-- Mensaje flotante de confirmación -->
+<div id="copy-message" class="copy-message">✅ Correo copiado al portapapeles</div>
+
+<script>
+    (function() {
+        const copyButton = document.getElementById('copy-btn');
+        const emailTable = document.getElementById('email-content');
+        const messageDiv = document.getElementById('copy-message');
+
+        function showMessage() {
+            messageDiv.classList.add('show');
+            setTimeout(() => {
+                messageDiv.classList.remove('show');
+            }, 2000);
+        }
+
+        async function copyEmailToClipboard() {
+            if (!emailTable) return;
+
+            // Clonamos la tabla para no modificar la vista original
+            const cloneTable = emailTable.cloneNode(true);
+            
+            // Aseguramos que las imágenes tengan URLs absolutas (ya las tienen)
+            // Creamos una estructura de correo básica pero respetando el diseño original
+            const fullHtml = `<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Correo Centrica</title></head>
+<body style="margin:0; padding:0; font-family: Arial, Helvetica, sans-serif; background-color:#f0f2f5;">
+    ${cloneTable.outerHTML}
+</body>
+</html>`;
+
+            // Extraemos texto plano como respaldo
+            const tempDiv = document.createElement('div');
+            tempDiv.appendChild(cloneTable);
+            const plainText = tempDiv.textContent || tempDiv.innerText;
+
+            try {
+                // Método moderno para copiar HTML + texto plano
+                if (navigator.clipboard && navigator.clipboard.write) {
+                    const htmlBlob = new Blob([fullHtml], { type: 'text/html' });
+                    const textBlob = new Blob([plainText], { type: 'text/plain' });
+                    await navigator.clipboard.write([
+                        new ClipboardItem({
+                            [htmlBlob.type]: htmlBlob,
+                            [textBlob.type]: textBlob
+                        })
+                    ]);
+                    showMessage();
+                } 
+                // Fallback para navegadores sin ClipboardItem
+                else {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = plainText;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    showMessage();
+                    console.warn('Copia solo texto plano (sin formato HTML)');
+                }
+            } catch (err) {
+                console.error('Error al copiar: ', err);
+                // Último recurso: copiar solo texto
+                const textarea = document.createElement('textarea');
+                textarea.value = plainText;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showMessage();
+                alert('Se copió el texto, pero es posible que pierda el formato. Pega en el correo y revisa.');
+            }
+        }
+
+        if (copyButton) {
+            copyButton.addEventListener('click', copyEmailToClipboard);
+        }
+    })();
+</script>
 </body>
 </html>
