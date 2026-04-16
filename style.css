@@ -240,6 +240,7 @@ body {
     font-weight: 700;
     padding: 12px 28px;
     border-radius: 6px;
+    align-items: center;
     text-decoration: none;
     margin: 8px 0 24px 0;
 }
