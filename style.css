@@ -165,6 +165,162 @@ body {
 }
 
 /* =================================================================== */
+/* Tabla contenedora del correo (.email-table)
+/* =================================================================== */
+.email-table {
+    width: 650px;
+    max-width: 100%;
+    border: 1px solid #e2e2e2;
+    border-radius: 24px;
+    overflow: hidden;
+    background-color: #ffffff;
+    margin: 24px auto 0 auto;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #222222;
+}
+ 
+/* Banner / imagen de cabecera */
+.email-table .banner-img {
+    width: 100%;
+    display: block;
+    border-radius: 24px 24px 0 0;
+}
+ 
+/* Hero de color sólido (cuando no hay imagen) */
+.e-hero {
+    width: 100%;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px 24px 0 0;
+}
+ 
+.e-hero span {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 13px;
+}
+ 
+/* Cuerpo del correo */
+.e-body {
+    padding: 28px 32px 20px 32px;
+}
+ 
+.e-body h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #163A73;
+    margin: 0 0 12px 0;
+    line-height: 1.3;
+    font-family: Arial, Helvetica, sans-serif;
+}
+ 
+.e-body h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #163A73;
+    margin: 20px 0 8px 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+ 
+.e-body p {
+    font-size: 14px;
+    color: #444444;
+    line-height: 1.7;
+    margin: 0 0 14px 0;
+}
+ 
+/* Botón CTA */
+.e-cta {
+    display: inline-block;
+    background: #0E58A9;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin: 8px 0 24px 0;
+}
+ 
+.e-cta:hover {
+    background: #0d3a7a;
+}
+ 
+/* Tarjeta inferior */
+.e-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    display: flex;
+    overflow: hidden;
+    margin-top: 8px;
+}
+ 
+.e-card-img {
+    width: 110px;
+    min-width: 110px;
+    background: #e8f0fb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ 
+.e-card-img span {
+    color: #b0c4de;
+    font-size: 12px;
+    text-align: center;
+    padding: 8px;
+}
+ 
+.e-card-img img {
+    width: 110px;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+ 
+.e-card-body {
+    padding: 14px 16px;
+    flex: 1;
+}
+ 
+.e-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #163A73;
+    margin: 0 0 5px 0;
+}
+ 
+.e-card-text {
+    font-size: 12px;
+    color: #666666;
+    line-height: 1.6;
+    margin: 0 0 8px 0;
+}
+ 
+.e-card-link {
+    font-size: 12px;
+    color: #0E58A9;
+    font-weight: 700;
+    text-decoration: none;
+}
+ 
+.e-card-link:hover {
+    text-decoration: underline;
+}
+ 
+/* Pie del correo */
+.e-footer {
+    border-top: 1px solid #eeeeee;
+    padding: 14px 32px;
+    font-size: 11px;
+    color: #999999;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =================================================================== */
 /* Estilos para las PÁGINAS DEL GENERADOR
 /* =================================================================== */
 .container {
